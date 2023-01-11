@@ -10,7 +10,6 @@ import {
   Image,
   StatusBar,
   Text,
-  View,
   VStack,
 } from "native-base";
 
@@ -19,7 +18,6 @@ import { Chat } from "./Chat";
 import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
-  const navigation = useNavigation();
   const { user } = useAuthStatechanged();
   return (
     <VStack flex={1} bg="gray.900">
@@ -55,11 +53,7 @@ export function Home() {
           />
         )}
       </HStack>
-      <View>
-        <TouchableOpacity onPress={() => navigation.navigate("chat")}>
-          <Text>a</Text>
-        </TouchableOpacity>
-      </View>
+      <Chat />
     </VStack>
   );
 }

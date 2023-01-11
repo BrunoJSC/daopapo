@@ -33,6 +33,7 @@ export function SignIn() {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       navigation.navigate("home");
+      setEmail(email);
     } catch (e) {
       console.log(e);
     } finally {

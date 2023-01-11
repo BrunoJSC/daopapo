@@ -4,7 +4,9 @@ export declare global {
       home: undefined;
       signin: undefined;
       signup: undefined;
-      chat: undefined;
+      chat: {
+        id: string;
+      };
     }
   }
 }

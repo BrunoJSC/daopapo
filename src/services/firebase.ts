@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { initializeFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -17,7 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-export const db = initializeFirestore(app, {
-  experimentalAutoDetectLongPolling: true,
-});
+export const db = getFirestore();
+
 export const auth = getAuth(app);
