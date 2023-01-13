@@ -4,35 +4,15 @@ import { useAuthStatechanged } from "@hooks/useAuthStatechanged";
 import { auth } from "@services/firebase";
 import { signOut } from "firebase/auth";
 
-import {
-  FlatList,
-  Heading,
-  HStack,
-  Image,
-  StatusBar,
-  Text,
-  View,
-  VStack,
-} from "native-base";
+import { Heading, HStack, Image, StatusBar, Text, VStack } from "native-base";
 import { Feather } from "@expo/vector-icons";
 
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Alert } from "react-native";
 import { Chat } from "./Chat";
 
 import { Camera, CameraType } from "expo-camera";
 
 export function Home() {
-  const [type, setType] = useState(CameraType.back);
-  const [hasPermission, setHasPermission] = Camera.useCameraPermissions();
-
-  if (!hasPermission) {
-    return Alert("aaaaaaaaaa");
-  }
-
-  if (!hasPermission.granted) {
-    setHasPermission();
-  }
-
   const toggleCameraType = (current: any) =>
     setType(current === CameraType.back ? CameraType.front : CameraType.back);
 
