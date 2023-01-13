@@ -1,7 +1,8 @@
+import { useState } from "react";
 import firebase from "firebase/firestore";
 import { useAuthStatechanged } from "@hooks/useAuthStatechanged";
 import { auth } from "@services/firebase";
-import { signOut, User } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 import {
   FlatList,
@@ -10,14 +11,31 @@ import {
   Image,
   StatusBar,
   Text,
+  View,
   VStack,
 } from "native-base";
+import { Feather } from "@expo/vector-icons";
 
 import { TouchableOpacity } from "react-native";
 import { Chat } from "./Chat";
-import { useNavigation } from "@react-navigation/native";
+
+import { Camera, CameraType } from "expo-camera";
 
 export function Home() {
+  const [type, setType] = useState(CameraType.back);
+  const [hasPermission, setHasPermission] = Camera.useCameraPermissions();
+
+  if (!hasPermission) {
+    return Alert("aaaaaaaaaa");
+  }
+
+  if (!hasPermission.granted) {
+    setHasPermission();
+  }
+
+  const toggleCameraType = (current: any) =>
+    setType(current === CameraType.back ? CameraType.front : CameraType.back);
+
   const { user } = useAuthStatechanged();
   return (
     <VStack flex={1} bg="gray.900">
@@ -52,6 +70,9 @@ export function Home() {
             alt="user"
           />
         )}
+        <TouchableOpacity onPress={toggleCameraType}>
+          <Text>{<Feather name="camera" color="#fff" />}</Text>
+        </TouchableOpacity>
       </HStack>
       <Chat />
     </VStack>

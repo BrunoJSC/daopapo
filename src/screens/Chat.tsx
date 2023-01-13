@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useCallback } from "react";
-import { TouchableOpacity, Text } from "react-native";
+
 import { GiftedChat } from "react-native-gifted-chat";
 import {
   collection,
@@ -8,17 +8,11 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
-import { signOut } from "firebase/auth";
 
-import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "@services/firebase";
 
 export function Chat() {
   const [messages, setMessages] = useState([]);
-
-  const onSignOut = () => {
-    signOut(auth).catch((error) => console.log("Error logging out: ", error));
-  };
 
   useLayoutEffect(() => {
     const collectionRef = collection(db, "chats");
@@ -63,13 +57,6 @@ export function Chat() {
       showAvatarForEveryMessage={false}
       showUserAvatar={false}
       onSend={(messages) => onSend(messages)}
-      messagesContainerStyle={{
-        backgroundColor: "#181818",
-      }}
-      textInputStyle={{
-        backgroundColor: "#000",
-        borderRadius: 20,
-      }}
       user={{
         _id: auth?.currentUser?.email,
         avatar: "https://i.pravatar.cc/300",
